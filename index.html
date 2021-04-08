@@ -6,28 +6,45 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tic Tac Toe</title>
   <link rel="stylesheet" href="css/project0.css">
+  <script src="js/jquery.js" charset="utf-8"></script>
 </head>
 <body>
   <div class="container">
     <h1>Tic Tac Toe</h1>
-    <h2 class="winner">Placeholder Text</h2>
-    <button onclick="reset_board()">RESET BOARD</button>
+    <h2 class="winner"><span id="winner"></span> </h2>
+    <div class="form-group1">
+      <label class="player-lable" for="player1">Player 1</label>
+      <input type="text" class="form-control" id="player1" placeholder="Enter your name">
+    </div>
+
+    <div class="form-group2">
+      <label class="player-lable" for="player2">Player 2</label>
+      <input type="text" class="form-control" id="player2" placeholder="Enter your name">
+    </div>
+    <div class="assign_token">
+      <button id="button1" class="button1" onclick="assign_player('X')">X</button>
+      <button id="button2" class="button2" onclick="assign_player('O')">O</button>
+    </div>
+
+    <button id="reset_button" onclick="reset_board()">RESET BOARD</button>
+  <div id="game" class="game">
     <div class="row border-bottom">
-      <div class="column border-right">0</div>
-      <div class="column border-right">1</div>
-      <div class="column">2</div>
+      <div id="0" class="column border-right"></div>
+      <div id="1" class="column border-right"></div>
+      <div id="2" class="column"></div>
     </div>
     <div class="row border-bottom">
-      <div class="column border-right">3</div>
-      <div class="column border-right">4</div>
-      <div class="column">5</div>
+      <div id="3" class="column border-right"></div>
+      <div id="4" class="column border-right"></div>
+      <div id="5" class="column"></div>
     </div>
     <div class="row">
-      <div class="column border-right">6</div>
-      <div class="column border-right">7</div>
-      <div class="column">8</div>
+      <div id="6" class="column border-right"></div>
+      <div id="7" class="column border-right"></div>
+      <div id="8" class="column"></div>
     </div>
   </div>
-  <script src="project0.js"></script>
+  </div>
+  <script src="js/project0.js"></script>
 </body>
 </html>
