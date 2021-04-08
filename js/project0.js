@@ -1,7 +1,44 @@
-// console.log(jQuery().jquery); // to check jQuery version
+let player;
+const playerOne = {
+  name: '',
+  token: '',
+  gamesWon: 0
+};
+const playerTwo = {
+  name: '',
+  token: '',
+  gamesWon: 0
+};
 
-const reset_board = function () {
+// First 3 functions are helper functions
 
+// Create a function, to change element text
+const changeText = function (elementRef, message) {
+  return $(elementRef).text(message);
+};
+
+// Adds invisible class
+const addInvisible = function(element) {
+  element.addClass('invisible');
+};
+
+// Removes invisible class
+const removeInvisible = function(element) {
+  element.removeClass('invisible');
+};
+
+// Validates player 1 and player 2 fields to ensure a value is entered - Makes these fields required.
+const validate = function(player) {
+  const fieldValue = $(`#${player}`).val();
+  if (!fieldValue) {
+    removeInvisible($(`#${player}-validation`));
+  } else {
+    addInvisible($(`#${player}-validation`));
+  }
+};
+
+// Resetting the game board to start again
+const reset_board = function() {
   $('#0').text('');
   $('#1').text('');
   $('#2').text('');
@@ -11,107 +48,65 @@ const reset_board = function () {
   $('#6').text('');
   $('#7').text('');
   $('#8').text('');
-  addInvisible($('#winner'));
+  addInvisible($('#winner')); //Hide the winner h2 element
+  removeInvisible($('#player-turn')); // Show player turn for next round
+  $('.winning-combination').removeClass('winning-combination'); // Remove winning animation.
 };
 
-const secondPlayerName = "";
-
-const changePlayer = function (player) {
-
+const changePlayer = function(player) {
   if (player === playerOne.token) {
+    changeText('#player-turn', `${playerTwo.name} it is your turn`);
     return playerTwo.token;
   } else if (player === playerTwo.token) {
+    changeText('#player-turn', `${playerOne.name} it is your turn`);
     return playerOne.token;
   }
 };
 
-let player;
-let playerOne = {
-  name: '',
-  token: ''
-};
-
-let playerTwo = {
- name: '',
- token: ''
-};
-
-const name1 = $('#player1').focusout(function(event) {
-  console.log(event.currentTarget.value);
+// Focus is removed from field - name is retrieved from what user has entered for player one
+$('#player1').focusout(function(event) {
   playerOne.name = event.currentTarget.value;
-  console.log(playerOne);
+
+  // if user has entered a value (field is not empty) Show player name select token selection
+  if (playerOne.name) {
+    changeText('#choose-token', `${playerOne.name}: Select your token`);
+    removeInvisible($('.assign_token'));
+  }
 });
 
-const name2 = $('#player2').focusout(function(event) {
-  console.log(event.currentTarget.value);
+// Focus is removed from field - name is retrieved from what user has entered for player two
+$('#player2').focusout(function(event) {
   playerTwo.name = event.currentTarget.value;
-  console.log(playerTwo);
 });
 
+// X button is clicked set playerOne token to X and set playerTwo tokent to O
 $('#button1').on('click', function() {
   playerOne.token = 'X';
   playerTwo.token = 'O';
-})
+});
 
+// O button is clicked set playerOne token tp O and set playerTwo token to X
 $('#button2').on('click', function() {
   playerOne.token = 'O';
   playerTwo.token = 'X';
-})
+});
 
 
-const assign_player = function (token) {
-  player = token;
-  addInvisible($('.assign_token'));
+const assign_player = function(token) {
+  if (playerOne.name && playerTwo.name) {
+    // Sets token for playerOne (first player)
+    player = token;
+    // Hides assign token div
+    addInvisible($('.assign_token'));
+    // Sets text to include player ones name
+    changeText('#player-turn', `${playerOne.name}: It is your turn`);
+    // Shows players turn text
+    removeInvisible($('#player-turn'));
+  }
 };
 
-const addInvisible = function (element) {
-  element.addClass('invisible');
-};
-
-const removeInvisible = function (element) {
-  element.removeClass('invisible');
-};
-
-// assign_player('X'); // player = 'X'
-
-for (let i = 0; i <= 8; i++) {
-
-  $(`#${i}`).on('click', function() {
-    console.log('player', player);
-
-    let winner = checkWinner();
-
-    if (winner != playerOne.token && winner != playerTwo.token) {
-      if ($(`#${i}`).text() === "") {
-        if (player === playerOne.token) {
-          $(`#${i}`).text(playerOne.token);
-        } else if (player === playerTwo.token) {
-          $(`#${i}`).text(playerTwo.token);
-        }
-        // check the winner before changing current player
-        winner = checkWinner();
-        console.log('winner:', winner);
-
-        if (winner === 'tie') {
-          removeInvisible($('#winner').text(`It is a tie`));
-        } else if (winner === playerOne.token || winner === playerTwo.token) {
-          if (winner === playerOne.token) {
-            removeInvisible($('#winner').text(`The winner is: ${playerOne.name}`));
-          } else if (winner === playerTwo.token) {
-            removeInvisible($('#winner').text(`The winner is: ${playerTwo.name}`));
-        };
-        }
-        // players take turns
-        player = changePlayer(player);
-      }
-    }
-})};
-
-// 0 1 2
-// 3 4 5
-// 6 7 8
-
-const checkWinner = function () {
+// Works out winning combinations
+const checkWinner = function() {
   const box0 = $('#0').text();
   const box1 = $('#1').text();
   const box2 = $('#2').text();
@@ -123,36 +118,86 @@ const checkWinner = function () {
   const box8 = $('#8').text();
 
   if (box0 === box1 && box1 === box2 && box0 != "") {
-    $('#0, #1, #2').addClass("winning_combination");
+    $('#0, #1, #2').addClass("winning-combination");
     return box0;
   } else if (box3 === box4 && box4 === box5 && box3 != "") {
-      return box3;
+    $('#3, #4, #5').addClass("winning-combination");
+    return box3;
   } else if (box6 === box7 && box7 === box8 && box6 != "") {
-      return box6;
+    $('#6, #7, #8').addClass("winning-combination");
+    return box6;
   } else if (box0 === box3 && box3 === box6 && box0 != "") {
-      return box0;
+    $('#0, #3, #6').addClass("winning-combination");
+    return box0;
   } else if (box1 === box4 && box4 === box7 && box1 != "") {
-      return box1;
+    $('#1, #4, #7').addClass("winning-combination");
+    return box1;
   } else if (box2 === box5 && box5 === box8 && box2 != "") {
-      return box2;
+    $('#5, #8, #2').addClass("winning-combination");
+    return box2;
   } else if (box0 === box4 && box4 === box8 && box0 != "") {
-      return box0;
+    $('#0, #4, #8').addClass("winning-combination");
+    return box0;
   } else if (box2 === box4 && box4 === box6 && box2 != "") {
-      return box2;
+    $('#2, #4, #6').addClass("winning-combination");
+    return box2;
   } else if (box0 != "" && box1 != "" && box2 != "" && box3 != "" && box4 != "" && box5 != "" && box6 != "" && box7 != "" && box8 != "") {
     return 'tie';
   }
-
 };
 
+// Handles adding X's and O's to the board and handles winner responses
+for (let i = 0; i <= 8; i++) {
 
-// if event.target have a value set it
+  $(`#${i}`).on('click', function() {
+    // Alerts if player names have not been entered or token has not been picked before someone has tried clicking on the board
+    if (!player || !playerOne.name || !playerTwo.name) {
+      return window.alert("Please enter your name and select a token before playing.");
+      removeInvisible($('.assign_token'));
+    }
+    let winner = checkWinner();
 
+    // If there there is no winner and block has no token allow token to be added
+    if (winner != playerOne.token && winner != playerTwo.token) {
+      if ($(`#${i}`).text() === "") {
+        if (player === playerOne.token) {
+          $(`#${i}`).text(playerOne.token);
+        } else if (player === playerTwo.token) {
+          $(`#${i}`).text(playerTwo.token);
+        }
+        // check the winner before changing current player
+        winner = checkWinner();
 
-// 1. userChoice
-// 2. computerChoice
-// 8. Get the computer to think strategically
-//
-// Website Examples:
-// https://codepen.io/marxcom/pen/LWQXRX
-// https://codepen.io/MutantSpore/pen/jWWYLo
+        // Handles response if game is tied
+        if (winner === 'tie') {
+          changeText('#winner', `It is a tie`);
+          removeInvisible($('#winner'));
+          addInvisible($('#player-turn')); removeInvisible($('.reset_button'));
+        } else if (winner === playerOne.token || winner === playerTwo.token) {
+          // Hanldes response if game is won by player one
+          if (winner === playerOne.token) {
+            changeText('#winner', `The winner is: ${playerOne.name}`);
+            playerOne.gamesWon = playerOne.gamesWon + 1;
+            changeText('#playerscore1', `${playerOne.gamesWon}`);
+            removeInvisible($('#winner'));
+          } else if (winner === playerTwo.token) {
+            // Handles response if game is won by player two
+            const message = changeText('#winner', `The winner is: ${playerTwo.name}`);
+            playerTwo.gamesWon = playerTwo.gamesWon + 1;
+            changeText('#playerscore2', `${playerTwo.gamesWon}`);
+            removeInvisible($('#winner'));
+          };
+          addInvisible($('#player-turn'));
+          removeInvisible($('.reset_button'));
+        };
+        // players take turns
+        player = changePlayer(player);
+      };
+    };
+  });
+};
+
+// If trying to play without entering a name - let user know √
+// Let current player know it is their turns √
+// Only show reset button after winner declared √
+// Add a comment for player one to choose token √

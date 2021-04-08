@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Kiwi+Maru:wght@500&display=swap');
+
 body {
   background-color: beige;
 }
 
 .container {
-  width: 320px;
-  height: 320px;
+  width: 600px;
+  height: 600px;
   margin: 0 auto;
   margin-top: 50px;
 }
 
- h1 {
+h1 {
   text-align: center;
   font-size: 73px;
   font-family: 'Satisfy', cursive, sans-serif;
@@ -25,6 +25,11 @@ h2 {
   font-size: 30px;
   font-family: 'Satisfy', cursive, sans-serif;
   color: black;
+  margin: 0 auto;
+}
+
+#winner {
+  margin-left: 1em;
 }
 
 .player-lable {
@@ -40,34 +45,44 @@ h2 {
   outline: none;
   border: 4px solid #e0e0c0;
   padding: 5px 10px;
+  text-transform: center;
 }
 
 .form-group1 {
-  margin-left: 52px;
+  margin-left: 70px;
   margin-bottom: 12px;
   outline: none;
   font-weight: bold;
   background: none;
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
+  display: inline-block;
 }
 
 .form-group2 {
-  margin-left: 49.5px;
+  margin-left: 12px;
   outline: none;
   font-weight: bold;
   background: none;
   transition: all 0.2s ease-in-out;
   border-radius: 10px;
   margin-top: 16px;
+  display: inline-block;
+}
+
+#player1-validation{
+  font-size: 10px;
+}
+
+#player2-validation{
+  font-size: 10px;
 }
 
 .assign_token {
   margin-top: 20px;
-
 }
 
-#reset_button  {
+.reset_button {
   outline: none;
   border: 4px solid #e0e0c0;
   padding: 10px 26px;
@@ -80,17 +95,17 @@ h2 {
   margin-bottom: 32px;
   font-family: 'Kiwi Maru', sans-serif;
   margin-top: 20px;
-  margin-left: 68px;
+  margin-left: 14em;
 }
 
 button:hover {
   cursor: pointer;
   background: #e0e0c0;
   color: black;
-
 }
 
 .row {
+  width: 330px;
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -103,17 +118,15 @@ button:hover {
   text-align: center;
   line-height: 100px;
   display: inline-block;
-
 }
 
 .column:hover {
-    background-color: #e0e0c0;
-    cursor: pointer;
+  background-color: #e0e0c0;
+  cursor: pointer;
 }
 
 .border-bottom {
   border-bottom: 5px solid black;
-
 }
 
 .border-right {
@@ -127,7 +140,7 @@ button:hover {
 
 .button1 {
   display: inline-block;
-  margin-left: 70px;
+  margin-left:14.5em;
   outline: none;
   border: 4px solid #e0e0c0;
   padding: 10px 20px;
@@ -153,11 +166,58 @@ button:hover {
   margin-left: 50px;
 }
 
+.choose-token {
+  font-family: 'Kiwi Maru', sans-serif;
+  text-align: center;
+  font-size: 18px;
+  margin-left: 3em;
+}
+
 .game {
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
+  margin-left: 10em;
 }
 
- .winning_combination {
-   background-color: green;
- }
+#player-turn {
+font-family: 'Kiwi Maru';
+margin-left: 13em;
+font-size: 18px;
+}
+
+.winning-combination {
+      font-size: 80px;
+      color: black;
+      text-align: center;
+      animation: glowing 1s ease-in-out infinite alternate;
+   }
+   @-webkit-keyframes glowing{
+      from {
+         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #5dd221, 0 0 40px #1f8c57, 0 0 50px #2d8232, 0 0 60px #1fb532, 0 0 70px #1f0352;
+      }
+}
+
+#scoreboard {
+  margin-left: 15em;
+  margin-top: 2em;
+}
+
+#scoreboard .score {
+  text-align: center;
+  font-size: 30px;
+}
+
+.player {
+  font-family: 'Kiwi Maru', sans-serif;
+}
+
+#playerscore1 {
+  color: #ED676B;
+  font-family: 'Kiwi Maru', sans-serif;
+}
+
+#playerscore2 {
+  color: #23916B;
+  font-family: 'Kiwi Maru', sans-serif;
+}
