@@ -13,7 +13,7 @@ const playerTwo = {
 // First 3 functions are helper functions
 
 // Create a function, to change element text
-const changeText = function (elementRef, message) {
+const changeText = function(elementRef, message) {
   return $(elementRef).text(message);
 };
 
@@ -173,7 +173,8 @@ for (let i = 0; i <= 8; i++) {
         if (winner === 'tie') {
           changeText('#winner', `It is a tie`);
           removeInvisible($('#winner'));
-          addInvisible($('#player-turn')); removeInvisible($('.reset_button'));
+          addInvisible($('#player-turn'));
+          removeInvisible($('.reset_button'));
         } else if (winner === playerOne.token || winner === playerTwo.token) {
           // Hanldes response if game is won by player one
           if (winner === playerOne.token) {
