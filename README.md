@@ -1,6 +1,6 @@
 # Project 0 - Tic Tac Toe
 
-![screenshot](images/TickTacToe.png)
+![screenshot](images/TicTacToe.png)
 
 ## Live Demo
 
