@@ -31,9 +31,9 @@ const removeInvisible = function(element) {
 const validate = function(player) {
   const fieldValue = $(`#${player}`).val();
   if (!fieldValue) {
-    removeInvisible($(`#${player}-validation`));
+    $(`#${player}-validation`).removeClass('hidden');
   } else {
-    addInvisible($(`#${player}-validation`));
+    $(`#${player}-validation`).addClass('hidden');
   }
 };
 
@@ -66,7 +66,7 @@ const changePlayer = function(player) {
 // Focus is removed from field - name is retrieved from what user has entered for player one
 $('#player1').focusout(function(event) {
   playerOne.name = event.currentTarget.value;
-
+  $('.name1').text(playerOne.name);
   // if user has entered a value (field is not empty) Show player name select token selection
   if (playerOne.name) {
     changeText('#choose-token', `${playerOne.name}: Select your token`);
@@ -77,6 +77,7 @@ $('#player1').focusout(function(event) {
 // Focus is removed from field - name is retrieved from what user has entered for player two
 $('#player2').focusout(function(event) {
   playerTwo.name = event.currentTarget.value;
+  $('.name2').text(playerTwo.name);
 });
 
 // X button is clicked set playerOne token to X and set playerTwo tokent to O

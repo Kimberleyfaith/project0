@@ -18,13 +18,13 @@
     <div class="form-group1">
       <label class="player-lable" for="player1">Player 1 </label>
       <input type="text" class="form-control" id="player1" placeholder="Enter your name" onblur="validate('player1')">
-      <p id="player1-validation" class="invisible">Please enter your name Player 1 </p>
+      <p id="player1-validation" class="hidden">Please enter your name Player 1 </p>
     </div>
 
     <div class="form-group2">
       <label class="player-lable" for="player2">Player 2 </label>
       <input type="text" class="form-control" id="player2" placeholder="Enter your name" onblur="validate('player2')">
-      <p id="player2-validation" class="invisible">Please enter your name Player 2</p>
+      <p id="player2-validation" class="hidden">Please enter your name Player 2</p>
     </div>
 
     <div class="assign_token invisible">
@@ -59,16 +59,16 @@
 
     <table id="scoreboard">
       <tr>
-        <td class="player"> Player 1 </td>
-        <td class="player"> Player 2 </td>
+        <td class="player name1"> Player 1 </td>
+        <td>&nbsp</td>
+        <td>&nbsp</td>
+        <td class="player name2"> Player 2 </td>
       </tr>
       <tr>
-        <td class="score" id="playerscore1">
-          0
-        </td>
-        <td class="score" id="playerscore2">
-          0
-        </td>
+        <td class="score" id="playerscore1"> 0 </td>
+        <td>&nbsp</th>
+          <td>&nbsp</td>
+        <td class="score" id="playerscore2"> 0 </td>
       </tr>
     </table>
   </div>
