@@ -30,8 +30,11 @@ Click this link to view site and play: [Live Demo Link](https://kimberleyfaith.g
 # Features
 
 - Ability to personalise the game with player names
+
 - Interactive page with features displayed only when needed.
+
 - When the user wins, show a unique transition
+
 - Score board to log results
 
 # Future Developments
