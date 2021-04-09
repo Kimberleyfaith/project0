@@ -13,7 +13,7 @@ Additional description about the project and its features.
 
 ## Live Demo
 
-Click here for the to play: [Live Demo Link](https://kimberleyfaith.github.io/project0/)
+Click this link to view site and play: [Live Demo Link](https://kimberleyfaith.github.io/project0/)
 
 # Instructions to Play
 
